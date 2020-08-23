@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="assets/app.css">
+        <title>Get Posts</title>
+    </head>
+    <body>
+        <h1>Fetch API REQUEST</h1>
+        <div id="app"></div>
+
+        <script>
+            const appDiv = document.getElementById("app");
+
+            function fetchData() {
+                fetch("http://localhost:3000/getPosts")
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then((json) => {
+                        appendData(json[0], json[1]);
+                    })
+                    .catch((err) => err);
+
+                function appendData(post, comment) {
+                    var mainContainer = document.getElementById("app");
+                    for (var i = 0; i < comment.length; i++) {
+                        var div = document.createElement("div");
+                        div.innerHTML = `
+                        <article id=${post[i].postId}>
+                            <header>
+                                <h1>${post[i].title}</h1>
+                                <p>${post[i].body}</p>
+                            </header>
+                            <footer>
+                                <article id=${comment[i].id}>
+                                <h2>${comment[i].name}</h2>
+                                <h3>${comment[i].email}</h3>
+                                <p>${comment[i].body}>
+                                </article>
+                                ...
+                            </footer>
+                        </article>
+                            `;
+                        mainContainer.appendChild(div);
+                    }
+                }
+            }
+
+            fetchData();
+        </script>
+    </body>
+</html>

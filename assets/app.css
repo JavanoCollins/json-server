@@ -1,0 +1,16 @@
+* {
+    font-family: Verdana;
+    padding: 1rem;
+}
+
+article {
+    border: 2px solid tomato;
+    margin: 2rem;
+    padding: 1rem;
+    font-family: Arial;
+}
+
+h1 {
+    text-transform: uppercase;
+    color: tomato;
+}
